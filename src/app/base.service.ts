@@ -6,7 +6,8 @@ import { Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class BaseService {
-  url ="https://localhost:7172/api/Animals/"
+  // url ="https://localhost:7172/api/Animals/"
+  url ="https://fnovenyrtdb.firebaseio.com/animals.json/"
 
   private animalSub = new Subject()
 
