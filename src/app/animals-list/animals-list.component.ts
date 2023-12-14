@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { BaseService } from '../base.service';
+import { ConfigService } from '../config.service';
 
 @Component({
   selector: 'app-animals-list',
@@ -8,8 +9,13 @@ import { BaseService } from '../base.service';
 })
 export class AnimalsListComponent {
   animals:any
-  constructor(private base: BaseService){
-    
+  oszlopok:any
+  constructor(
+    private base: BaseService, 
+    private config:ConfigService){
+   
+    this.oszlopok=this.config.getOszlopok() 
+
     this.base.getAnimals().subscribe(
       (res)=>this.animals=res
     )
