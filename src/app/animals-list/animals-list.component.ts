@@ -10,6 +10,8 @@ import { ConfigService } from '../config.service';
 export class AnimalsListComponent {
   animals:any
   oszlopok:any
+  newAnimal:any={}
+
   constructor(
     private base: BaseService, 
     private config:ConfigService){
@@ -19,5 +21,18 @@ export class AnimalsListComponent {
     this.base.getAnimals().subscribe(
       (res)=>this.animals=res
     )
+  }
+
+  postAnimal(){
+    this.base.postAnimal(this.newAnimal)
+    this.newAnimal={}
+  }
+
+  putAnimal(allat:any){
+    this.base.putAnimal(allat)
+  }
+
+  deleteAnimal(allat:any){
+    this.base.deleteAnimal(allat)
   }
 }

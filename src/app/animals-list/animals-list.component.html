@@ -1,7 +1,7 @@
 <p>Állatok: {{animals|json}}</p>
 {{oszlopok|json}}
 
-<div class="row">
+<div class="row my-3">
     <div *ngFor="let oszlop of oszlopok" class="col">
         {{oszlop.text}}
     </div>
@@ -10,7 +10,31 @@
     </div>
 </div>
 
-<div *ngFor="let allat of animals" class="row">
+<div class="row my-4">
+    <div *ngFor="let oszlop of oszlopok" class="col">
+
+        <ng-container *ngIf="oszlop.type=='Checkbox'; else simainput">
+            <div class="form-check form-switch">
+                <input [(ngModel)]="newAnimal[oszlop.key]" class="form-check-input" type="checkbox">
+             </div>
+        </ng-container>
+        
+        <ng-template #simainput>
+            <input [(ngModel)]="newAnimal[oszlop.key]" [type]="oszlop.type" class="form-control">
+        </ng-template>
+       
+        <!-- {{allat[oszlop.key]}} -->
+    </div>
+
+    <div class="col">
+        <button (click)="postAnimal()" type="button" class="btn btn-primary">Hozzáadás</button>
+     
+    </div>
+
+</div>
+
+
+<div *ngFor="let allat of animals" class="row my-2">
     <div *ngFor="let oszlop of oszlopok" class="col">
 
         <ng-container *ngIf="oszlop.type=='Checkbox'; else simainput">
@@ -18,7 +42,7 @@
                 <input [(ngModel)]="allat[oszlop.key]" class="form-check-input" type="checkbox">
              </div>
         </ng-container>
-        
+
         <ng-template #simainput>
             <input [(ngModel)]="allat[oszlop.key]" [type]="oszlop.type" class="form-control">
         </ng-template>
@@ -27,8 +51,8 @@
     </div>
 
     <div class="col">
-        <button type="button" class="btn btn-primary">Mentés</button>
-        <button type="button" class="ms-2 btn btn-secondary">Törlés</button>
+        <button (click)="putAnimal(allat)" type="button" class="btn btn-primary">Mentés</button>
+        <button (click)="deleteAnimal(allat)" type="button" class="ms-2 btn btn-secondary">Törlés</button>
     </div>
 
 </div>
